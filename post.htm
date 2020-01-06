@@ -1,0 +1,49 @@
+<html>
+<head>
+<script type="text/javascript">
+function showHint()
+{
+	var str = document.getElementById('inputdata').value;
+	document.getElementById("txtHint2").innerHTML='##'+str;
+	var xmlhttp;
+	if (str.length==0) { 
+	  document.getElementById("txtHint").innerHTML="";
+	  return;
+	}
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	}
+	else {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","/asp/send.asp?q="+str,true);
+	xmlhttp.send();
+}
+
+</script>
+</head>
+<body>
+
+
+<p><a href="/1.htm">返回</a> 
+
+<h3>输入数据：</h3>
+
+<textarea id="inputdata" style="width:500px; height:500px;">{ "COMTYPE": { "TYPE": "UP", "MSGID": 268, "CLIENTID": "C8C9CACBCCD7850", "CONTENT": { "TYPE": "REPORTBORDCAST", "DATA": { "NUMBER": 9, "TYPE1": "047D", "MAC1": "E271E8357DAE", "RSSI1": "43", "PACK1": "0000000000020000000001400323004100001882", "TYPE2": "0478", "MAC2": "FF14D6DF86B6", "RSSI2": "37", "PACK2": "B90000004670600EBB5F5CB400000000005401", "TYPE3": "0000", "MAC3": "FA7F0D0B7437", "RSSI3": "3C", "PACK3": "0000000000020000000000AE4C060041253A", "TYPE4": "0483", "MAC4": "F546AFC68356", "RSSI4": "3A", "PACK4": "0000000000020000000000264D06004124B2", "TYPE5": "0483", "MAC5": "D7D17D72CB23", "RSSI5": "4C", "PACK5": "0000000000020000000000874C060041281E", "TYPE6": "0483", "MAC6": "F9D74E0F5FB4", "RSSI6": "22", "PACK6": "00000000000200000000007923190041269E", "TYPE7": "0483", "MAC7": "FD6FE03DF612", "RSSI7": "39", "PACK7": "0000000000020000000000BB4C0600412C26", "TYPE8": "0483", "MAC8": "F9C5E611E30D", "RSSI8": "43", "PACK8": "0000000000020000000000CE4B060041265E", "TYPE9": "0483", "MAC9": "E67422610594", "RSSI9": "37", "PACK9": "0000000000020000000000DA4D0600412B41" } } } }
+</textarea>
+<button type="button" onclick="showHint()"> 发送 </button>
+
+<p>建议：<span id="txtHint"></span></p> 
+
+<div id="txtHint1">
+</div>
+
+<div id="txtHint2">
+</div>
+</body>
+</html>

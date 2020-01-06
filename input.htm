@@ -1,0 +1,41 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+</head>
+
+<body>
+
+<form action="/web/2.HTML">
+<input id="inputdata" type="edit" style="width:500px; height:500px;" name="lastname">
+<br>
+</br>
+<input type="submit" value="发送">
+</form>
+
+<input type="text" name="firstname">
+<button type="button" onclick="sendData()"> 发送 </button>
+
+<div id="div4">
+</div>
+<div id="div5">
+</div>
+
+<script>
+	localStorage.setItem('namedata', "123213");
+	function sendData() {
+		
+		var name = document.getElementById("inputdata").value;
+		localStorage.setItem('namedata', name);
+		document.getElementById('div5').innerHTML=name;
+	}
+	var count = 0;
+	setInterval(function counts(){
+		count++;
+		document.getElementById('div4').innerHTML=count;
+	}, 1000);
+</script>
+
+</body>
+
+</html>

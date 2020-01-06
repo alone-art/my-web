@@ -1,0 +1,145 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>无标题文档</title>
+<style>
+.table1 {border-collapse: collapse;}
+.table1 tr {}
+.table1 tr td {text-align:center; line-height:36px;}
+.table1 tr td:hover { background-color:#fff; color:#00f;}
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+
+<body>
+
+<!--<img src="/web/girl1.gif" width="638" height="358" />-->
+
+<form action="/web/login.asp">
+<br>
+ 账户:<br>
+<input type="text" name="firstname">
+<br>
+ 密码:<br>
+<input type="text" name="lastname">
+<br><br>
+<input type="submit" value="登录">
+</form>
+
+<div id="div1">
+</div>
+<br><br>
+<div id="div2">
+</div>
+<div id="div3">
+</div>
+<div id="div4">
+</div>
+
+<p /p>
+<a href="/1.htm">返回上一层</a>
+
+<table id='chmv' class=table1 border="10" width="1000">
+	<tr id="x">
+	<td style="background:RGB(200,210,210)">序号</td>
+	<td style="background:RGB(200,210,210)">物理地址</td>
+	<td style="background:RGB(200,210,210)">设备类型</td>
+	<td style="background:RGB(200,210,210)">信号强度</td>
+	<td style="background:RGB(200,210,210)">数据包</td>
+	<td style="background:RGB(200,210,210)">累计重复</td>
+	</tr>
+</table>
+
+<p /p>
+<a href="/frame.htm">测试</a>
+
+<table class="table1" width="70%" border="1">
+  <tr>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+    <td>测试</td>
+  </tr>
+</table>
+
+</body>
+<script type="text/javascript">
+	var listIndex = 1;
+	function changsColorTable(tab) {
+		var rows = tab.rows.length;
+		for(var i=1; i<rows; i++) {
+			tab.rows[i].cells[1].style.background = "white";
+		}
+	}
+	function findMac(tab, macc, numc) {
+		for(var i=0; i<numc; i++) {
+			if(tab.rows[i].cells[1].innerHTML==macc) {
+				tab.rows[i].cells[1].style.background = "red";
+				tab.rows[i].cells[5].innerHTML = Number(tab.rows[i].cells[5].innerHTML) + 1;
+				return true;
+			}
+		}
+		return false;
+	}
+	function addListTable(jsString) {
+		var obj = eval ("(" + jsString + ")");
+		var number = Number(obj.comType.content.data.number);
+		
+		var tabb=document.getElementById('chmv');
+		changsColorTable(tabb);
+		for(var i=0; i<number; i++) {
+			
+			if(findMac(tabb, eval('obj.comType.content.data.mac' + String(i+1)), listIndex)) {
+				continue;
+			}
+			var n=listIndex;
+			var tr=tabb.insertRow(n);
+			var td=tr.insertCell(0);
+			td.innerHTML=listIndex++;
+			td=tr.insertCell(1);
+			td.innerHTML=eval('obj.comType.content.data.mac' + String(i+1));
+			td=tr.insertCell(2);
+			td.innerHTML=eval('obj.comType.content.data.type' + String(i+1));
+			td=tr.insertCell(3);
+			td.innerHTML=eval('obj.comType.content.data.rssi' + String(i+1));
+			td=tr.insertCell(4);
+			td.innerHTML=eval('obj.comType.content.data.pack' + String(i+1))
+			td=tr.insertCell(5);
+			td.innerHTML=1;
+		}
+	}
+	div2.innerHTML=0;
+	var count = 0;
+	setInterval(function counts(){
+			count++;
+			document.getElementById('div2').innerHTML=count;
+			ta = localStorage.getItem('namedata');
+			if(ta != 0) {
+				document.getElementById('div3').innerHTML=ta;
+				addListTable(ta);
+				//div1.innerHTML=tab1;
+				//var td = document.getElementById('test').rows[1].cells[5];
+				///alert(td);
+				//td.innerHTML = String(Number(td.innerHTML)+1);
+				//document.getElementById("test").creareElement("tr");
+			}
+			localStorage.setItem('namedata', 0);
+			document.getElementById('div3').innerHTML=" ";
+		}, 1000);
+</script>
+
+
+
+
+
+</html>
